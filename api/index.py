@@ -8,7 +8,7 @@ import json
 
 
 def getLinks(url):
-    url.replace('https', 'http')
+    url = 'http://' + url
     if url[-1] == "/":
         url = url[:-1]
     url = url + '/archives'
