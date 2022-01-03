@@ -1,5 +1,4 @@
 
-
 import bs4
 import requests
 import re
@@ -33,15 +32,12 @@ def getLinks(url):
 
 
 def getdata(url):
-
-
-
     list_links = []
     list_links += getLinks(url)
-    for i in range(2,100):
-
-        if getLinks(url + "/page/" + str(i) + "/") != []:
-            list_links += getLinks(url + "/page/" + str(i) + "/")
+    for i in range(2 ,100):
+        temp = getLinks(url + "/page/" + str(i) + "/")
+        if temp:
+            list_links += temp
         else:
             break
     news_ids = []
@@ -49,10 +45,9 @@ def getdata(url):
         if id not in news_ids:
             news_ids.append(id)
 
-
     list_links = news_ids
     newss_ids = []
-    ex = ["https","http",'/tags', '/categories', '/archives', '/friends','/shuoshuo', '/bangumi', '/movie', '/about', '/rss2.xml', '/atom.xml','/talk', '/page/','/search/', '/toys/','/fcircle/', '/link/', '/comments/', '/gallery/', '/random/','/null','/daodaoplus/','/music/', '/messageboard/', '/friendcircle/','/bber/',]
+    ex = ["https" ,"http" ,'/tags', '/categories', '/archives', '/friends' ,'/shuoshuo', '/bangumi', '/movie', '/about', '/rss2.xml', '/atom.xml' ,'/talk', '/page/' ,'/search/', '/toys/' ,'/fcircle/', '/link/', '/comments/', '/gallery/', '/random/' ,'/null' ,'/daodaoplus/' ,'/music/', '/messageboard/', '/friendcircle/' ,'/bber/' ,]
     for i in list_links:
         time = 0
         for j in ex:
@@ -61,7 +56,7 @@ def getdata(url):
         if time == 0:
             newss_ids.append(i)
 
-    return len(newss_ids)-1
+    return len(newss_ids ) -1
 
 
 class handler(BaseHTTPRequestHandler):
@@ -83,7 +78,3 @@ class handler(BaseHTTPRequestHandler):
 
         self.wfile.write(json.dumps(data).encode('utf-8'))
         return
-
-
-
-
