@@ -8,12 +8,6 @@ import json
 
 
 def getLinks(url):
-    url = 'http://' + url
-    if url[-1] == "/":
-        url = url[:-1]
-    url = url + '/archives'
-
-
     links = []
     print(url)
     try:
@@ -73,14 +67,18 @@ def getdata(url):
 class handler(BaseHTTPRequestHandler):
     def do_GET(self):
         path = self.path
-        user = path.split('?')[1]
-        data = getdata(user)
+        url = path.split('?')[1]
+        url = 'http://' + url
+        if url[-1] == "/":
+            url = url[:-1]
+        url = url + '/archives'
+        data = getdata(url)
         self.send_response(200)
         self.send_header('Access-Control-Allow-Origin', '*')
         self.send_header('Content-type', 'application/json')
         self.end_headers()
 
-        self.wfile.write(json.dumps(data,getLinks(user)).encode('utf-8'))
+        self.wfile.write(json.dumps(data).encode('utf-8'))
         return
 
 
