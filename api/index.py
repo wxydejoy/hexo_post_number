@@ -62,7 +62,7 @@ def getdata(url):
 class handler(BaseHTTPRequestHandler):
     def setup(self):
         BaseHTTPRequestHandler.setup(self)
-        self.request.settimeout(60)
+        self.request.settimeout(600000)
     def do_GET(self):
         path = self.path
         url = path.split('?')[1]
