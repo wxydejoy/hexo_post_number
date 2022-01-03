@@ -15,7 +15,7 @@ def getLinks(url):
 
 
     links = []
-
+    print(url)
     try:
         requests.DEFAULT_RETRIES = 5
         requests.keep_alive = False
